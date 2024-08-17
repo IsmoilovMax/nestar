@@ -1,12 +1,29 @@
-// ZJ-TASK:
+// ZK-TASK:
 
-// Shunday function yozing, u berilgan arrayni ichidagi numberlarni qiymatini hisoblab qaytarsin.
-// MASALAN: reduceNestedArray([1, [1, 2, [4]]]) return 8
+// Shunday function yozing, u har soniyada bir marta consolega 1 dan 5 gacha bolgan raqamlarni chop etsin va 5 soniyadan keyin ishini toxtatsin.
+// MASALAN: printNumbers()
 
-
-function NestedArray(arr: any[]): number {
-    return arr.reduce((sum, item) => 
-        sum + (Array.isArray(item) ? NestedArray(item) : item), 0);
+async function printNumbers() {
+    for (let i = 1; i <= 5; i++) {
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        console.log(i);
+    }
 }
 
-console.log(NestedArray([2, [3, 6, [2]]]))
+printNumbers();
+
+
+
+
+// // ZJ-TASK:
+
+// // Shunday function yozing, u berilgan arrayni ichidagi numberlarni qiymatini hisoblab qaytarsin.
+// // MASALAN: reduceNestedArray([1, [1, 2, [4]]]) return 8
+
+
+// function NestedArray(arr: any[]): number {
+//     return arr.reduce((sum, item) => 
+//         sum + (Array.isArray(item) ? NestedArray(item) : item), 0);
+// }
+
+// console.log(NestedArray([2, [3, 6, [2]]]))
