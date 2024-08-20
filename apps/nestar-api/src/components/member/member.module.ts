@@ -6,7 +6,12 @@ import MemberSchema from '../../schemas/Member.model';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{name: "Member", schema: MemberSchema}])
+    // forFeature => DI (Dependency Injection) konteyneriga qo'shishdir.
+    MongooseModule.forFeature(
+      [
+        {name: "Member", schema: MemberSchema}
+      ]
+    )
   ],
   providers: [MemberResolver, MemberService]
 })

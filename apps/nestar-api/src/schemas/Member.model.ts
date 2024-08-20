@@ -112,7 +112,7 @@ const MemberSchema = new Schema({
     },
 
     deleteAt: {
-        tyoe: Date
+        type: Date
     }
 }, 
     {timestamps: true, collection: 'members'}
