@@ -15,6 +15,10 @@ console.log(stringToKebab("I love Kebab")); // "i-love-kebab"
 
 
 
+// @Args('input') dekoratori NestJS GraphQL moduli yordamida 
+// resolver funksiyasida GraphQL argumentlarini qabul qilish uchun ishlatiladi. 
+// U so'rov yoki mutatsiyada yuborilgan input argumentini olib, 
+// funksiyaga o'tkazadi, bu esa ma'lumotlarni ishlatishni osonlashtiradi.
 
 
 // // ZK-TASK:

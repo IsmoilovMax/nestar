@@ -5,6 +5,7 @@ import { LoginInput, MemberInput } from '../../libs/dto/member/member.input';
 import { Member } from '../../libs/dto/member/member';
 
 
+
 @Resolver()
 export class MemberResolver {
     constructor(private readonly memberService: MemberService) {}

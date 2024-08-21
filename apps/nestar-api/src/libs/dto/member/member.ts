@@ -2,7 +2,7 @@ import { Field, Int, ObjectType } from "@nestjs/graphql";
 import { ObjectId } from "mongoose";
 import { MemberAuthType, MemberStatus, MemberType } from "../../enums/member.enum";
 
-
+//@Field => GraphQL typeni aniqlash
 
 @ObjectType()
 export class Member {
@@ -23,7 +23,8 @@ export class Member {
 
     @Field(() => String)
     memberNick: string;
-
+    
+    // select: false, GraphQL sxemasida ko'rsatilmaydi
     memberPassword?: string;
 
     @Field(() => String, {nullable: true})
@@ -33,7 +34,7 @@ export class Member {
     memberImage?: string;
 
     @Field(() => String, {nullable: true})
-    memberAdress?: string;
+    memberAddress?: string;
 
     @Field(() => String, {nullable: true})
     memberDesc?: string;
@@ -69,7 +70,7 @@ export class Member {
     memberWarnings: number;
 
     @Field(() => Int)
-    memberBlock: number;
+    memberBlocks: number;
 
     @Field(() => Date, {nullable: true})
     deletedAt?: Date;  
