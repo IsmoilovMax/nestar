@@ -22,7 +22,7 @@ export class LoggingInterceptor implements NestInterceptor {
         
         /**(2) - ERRORS HANDING VIA GRAPHQL */
 
-        /**(3) - NO ERRORS GIVING RESPONSE BELOW */
+        /**(3) - NO ERRORS GIVING RESPONSE BELOW */ 
         return next.handle().pipe(
             tap((context) => {
                 const responseTime = Date.now() - recordTime;
