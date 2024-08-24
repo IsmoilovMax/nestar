@@ -1,20 +1,37 @@
-// ZM-TASK:
+// ZN-TASK:
 
-// Shunday function yozing, u function parametrga berilgan raqamlarni orqasiga ogirib qaytarsin.
-// MASALAN: reverseInteger(123456789) return 987654321
-
-
-
-function reverseInteger(n: number): number {
-    const reversed = parseInt(
-        n.toString().split('').reduce((acc, char) => char + acc, ''),
-        10
-    );
-    return Math.sign(n) * reversed;
+// Shunday function yozing, uni array va number parametri bolsin. Ikkinchi parametrda berilgan raqamli indexgacha arrayni orqasiga ogirib qaytarsin.
+// MASALAN: rotateArray([1, 2, 3, 4, 5, 6], 3) return [5, 6, 1, 2, 3, 4]
+function rotateArray(arr: number[], index: number): number[] {
+    arr.reverse();
+    const part1 = arr.splice(0, arr.length - index);
+    return part1.reverse().concat(arr.reverse());
 }
 
+console.log(rotateArray([1, 2, 3, 4, 5, 6], 2)) //[ 3, 4, 5, 6, 1, 2 ]
 
-console.log(reverseInteger(987654321))
+
+
+
+
+
+// // ZM-TASK:
+
+// // Shunday function yozing, u function parametrga berilgan raqamlarni orqasiga ogirib qaytarsin.
+// // MASALAN: reverseInteger(123456789) return 987654321
+
+
+
+// function reverseInteger(n: number): number {
+//     const reversed = parseInt(
+//         n.toString().split('').reduce((acc, char) => char + acc, ''),
+//         10
+//     );
+//     return Math.sign(n) * reversed;
+// }
+
+
+// console.log(reverseInteger(987654321))
 
 
 
