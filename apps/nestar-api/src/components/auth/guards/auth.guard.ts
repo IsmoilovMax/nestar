@@ -10,6 +10,7 @@ export class AuthGuard implements CanActivate {
 		console.info('--- @guard() Authentication [AuthGuard] ---');
 
 		if (context.contextType === 'graphql') {
+			//context.getArgByIndex(2).req orqali request obyektiga kirish.
 			const request = context.getArgByIndex(2).req;
 
 			const bearerToken = request.headers.authorization;
