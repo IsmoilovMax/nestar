@@ -1,3 +1,12 @@
+// ZP-TASK:
+
+// shunday function yozing, u 2 ta array parametr qabul qilsin. Siz bu ikki arrayning qiymatlari o'xshash bo'lishini (ya'ni, ularning barcha elementlari bir xil bo'lishini) tekshirishingiz kerak.
+
+// MASALAN: 
+// areArraysEqual([1, 2, 3], [3, 1, 2]) // true
+// areArraysEqual([1, 2, 3], [3, 1, 2, 1]) // true
+// areArraysEqual([1, 2, 3], [4, 1, 2]) // false
+
 function areArraysEqual(arr1: number[], arr2: number[]): boolean {
     // Arraylarni sortlash
     arr1.sort((a, b) => a - b);
