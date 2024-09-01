@@ -1,7 +1,7 @@
-import { Args, Mutation,Query, Resolver } from '@nestjs/graphql';
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { PropertyService } from './property.service';
 import { Properties, Property } from '../../libs/dto/property/property';
-import { PropertyInput } from '../../libs/dto/property/property.input';
+import { AgentPropertiesInquiry, PropertyInput } from '../../libs/dto/property/property.input';
 import { Roles } from '../auth/decorators/roles.decorator';
 import { MemberType } from '../../libs/enums/member.enum';
 import { UseGuards } from '@nestjs/common';
@@ -10,9 +10,8 @@ import { AuthMember } from '../auth/decorators/authMember.decorator';
 import { ObjectId } from 'mongoose';
 import { WithoutGuard } from '../auth/guards/without.guard';
 import { shapeIntoMongoObjectId } from '../../libs/types/config';
-import { PropertiesInquiry} from '../../libs/dto/property/property.input';
+import { PropertiesInquiry } from '../../libs/dto/property/property.input';
 import { PropertyUpdate } from '../../libs/dto/property/property.update';
-
 
 @Resolver()
 export class PropertyResolver {
@@ -36,9 +35,9 @@ export class PropertyResolver {
 		@Args('propertyId') input: string,
 		@AuthMember('_id') memberId: ObjectId,
 	): Promise<Property> {
-		console.log("Query: getProperty");
+		console.log('Query: getProperty');
 		const propertyId = shapeIntoMongoObjectId(input);
-		return await this.propertyService.getProperty(memberId, propertyId)
+		return await this.propertyService.getProperty(memberId, propertyId);
 	}
 
 	@Roles(MemberType.AGENT)
@@ -46,10 +45,9 @@ export class PropertyResolver {
 	@Mutation((returns) => Property)
 	public async updateProperty(
 		@Args('input') input: PropertyUpdate,
-		@AuthMember('_id') memberId : ObjectId,
+		@AuthMember('_id') memberId: ObjectId,
 	): Promise<Property> {
-
-		console.log("Mutation: updateProperty");
+		console.log('Mutation: updateProperty');
 		input._id = shapeIntoMongoObjectId(input._id);
 		return await this.propertyService.updateProperty(memberId, input);
 	}
@@ -60,7 +58,19 @@ export class PropertyResolver {
 		@Args('input') input: PropertiesInquiry,
 		@AuthMember('_id') memberId: ObjectId,
 	): Promise<Properties> {
-		console.log("Query: getProperties");
-		return await this.propertyService.getProperties(memberId, input)
+		console.log('Query: getProperties');
+		return await this.propertyService.getProperties(memberId, input);
+	}
+
+	//getAgentProperties
+	@Roles(MemberType.AGENT)
+	@UseGuards(RolesGuard)
+	@Query((retunrs) => Properties)
+	public async getAgentProperties(
+		@Args('input') input: AgentPropertiesInquiry,
+		@AuthMember('_id') memberId: ObjectId,
+	): Promise<Properties> {
+		console.log('Query getAgentProperties');
+		return await this.propertyService.getAgentProperties(memberId, input);
 	}
 }
