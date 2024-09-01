@@ -4,6 +4,7 @@ import { ObjectId } from "mongoose";
 import { PropertyLocation, PropertyStatus, PropertyType } from "../../enums/property.enum";
 
 
+
 @InputType()
 export class PropertyUpdate {
     @IsNotEmpty()
@@ -76,6 +77,5 @@ export class PropertyUpdate {
     @IsOptional()
     @Field(() => Date, {nullable:true})
     constructedAt?: Date;
-
 
 }
