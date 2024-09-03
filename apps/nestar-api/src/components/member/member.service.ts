@@ -104,6 +104,7 @@ export class MemberService {
 		if (text) match.memberNick = { $regex: new RegExp(text, 'i') };
 		console.log('match:', match);
 
+		
 		const result = await this.memberModel
 			.aggregate([
 				{ $match: match },
