@@ -16,7 +16,7 @@ import { PropertyStatus } from '../../libs/enums/property.enum';
 import { ViewGroup } from '../../libs/enums/view.enum';
 import { PropertyUpdate } from '../../libs/dto/property/property.update';
 import * as moment from 'moment';
-import { lookupMember, shapeIntoMongoObjectId } from '../../libs/types/config';
+import { lookupMember, shapeIntoMongoObjectId } from '../../libs/config';
 
 @Injectable()
 export class PropertyService {

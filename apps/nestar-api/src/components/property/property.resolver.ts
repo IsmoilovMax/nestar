@@ -9,7 +9,7 @@ import { RolesGuard } from '../auth/guards/roles.guard';
 import { AuthMember } from '../auth/decorators/authMember.decorator';
 import { ObjectId } from 'mongoose';
 import { WithoutGuard } from '../auth/guards/without.guard';
-import { shapeIntoMongoObjectId } from '../../libs/types/config';
+import { shapeIntoMongoObjectId } from '../../libs/config';
 import { PropertiesInquiry } from '../../libs/dto/property/property.input';
 import { PropertyUpdate } from '../../libs/dto/property/property.update';
 
