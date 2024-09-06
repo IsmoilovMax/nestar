@@ -68,7 +68,7 @@ export class BoardArticleService {
 		const { _id, articleStatus } = input;
 
 		const result = await this.boardArticleModel
-			.findByIdAndUpdate(
+			.findOneAndUpdate(
 				{
 					_id: _id,
 					memberId: memberId,
