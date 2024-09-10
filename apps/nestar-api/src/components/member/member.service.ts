@@ -15,11 +15,13 @@ import { ObjMapLike } from 'graphql/jsutils/ObjMap';
 import { LikeInput } from '../../libs/dto/like/like.input';
 import { LikeGroup } from '../../libs/enums/like.enum';
 import { LikeService } from '../like/like.service';
+import { Follower, Following, MeFollowed } from '../../libs/dto/follow/follow';
 
 @Injectable()
 export class MemberService {
 	constructor(
 		@InjectModel('Member') private readonly memberModel: Model<Member>,
+		@InjectModel('Follow') private readonly followModel: Model<Follower | Following>,
 		private authService: AuthService,
 		private viewService: ViewService,
 		private likeService: LikeService,
@@ -91,16 +93,23 @@ export class MemberService {
 			const newView = await this.viewService.recordView(viewInput);
 			if (newView) {
 				//Increase memberView
-				await this.memberModel.findByIdAndUpdate(search, { $inc: { memberViews: 1 } }, { new: true }).exec();
+				await this.memberModel.findOneAndUpdate(search, { $inc: { memberViews: 1 } }, { new: true }).exec();
 				targetMember.memberViews++;
 			}
 			//MeLiked
-			const likeInput = { memberId: memberId, likeRefId: targetId, likeGroup: LikeGroup.MEMBER};
+			const likeInput = { memberId: memberId, likeRefId: targetId, likeGroup: LikeGroup.MEMBER };
 			targetMember.meLiked = await this.likeService.checkLikeExistance(likeInput);
-			//MeFollowed
-		}
 
+			//MeFollowed
+			targetMember.meFollowed = await this.checkSubscription(memberId, targetId);
+		}
+ 
 		return targetMember;
+	}
+
+	private async checkSubscription(followerId: ObjectId, followingId: ObjectId): Promise<MeFollowed[]> {
+		const result = await this.followModel.findOne({ followingId: followingId, followerId: followerId }).exec();
+		return result ? [{ followerId: followerId, followingId: followingId, myFollowing: true }] : [];
 	}
 
 	public async getAgents(memberId: ObjectId, input: AgentsInquiry): Promise<Members> {
