@@ -16,7 +16,7 @@ import { Connection } from 'mongoose'
 export class DatabaseModule {
     constructor(@InjectConnection() private readonly connection : Connection) {
         if(connection.readyState === 1) {
-            console.log(`Mongo is Connected into 
+            console.log(`Mongo is Connected into  
                 ${process.env.NODE_ENV === 'production' ? 'production' :  'develoment'} db `)
         } else {
             console.log('DB is Not Connected!');
