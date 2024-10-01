@@ -114,7 +114,7 @@ export class MemberService {
 	}
 
 	public async getAgents(memberId: ObjectId, input: AgentsInquiry): Promise<Members> {
-		const { text } = input.search;
+		const text = input?.search?.text;
 		const match: T = { memberType: MemberType.AGENT, memberStatus: MemberStatus.ACTIVE };
 		const sort: T = { [input?.sort ?? 'createdAt']: input?.direction ?? Direction.DESC };
 
