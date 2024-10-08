@@ -9,9 +9,9 @@ import { AuthService } from '../auth/auth.service';
 import { MemberUpdate } from '../../libs/dto/member/member.update';
 import { StatisticModifier, T } from '../../libs/types/common';
 import { ViewService } from '../view/view.service';
-import { ViewInput } from '../../libs/dto/view/view.unput';
+
 import { ViewGroup } from '../../libs/enums/view.enum';
-import { ObjMapLike } from 'graphql/jsutils/ObjMap';
+
 import { LikeInput } from '../../libs/dto/like/like.input';
 import { LikeGroup } from '../../libs/enums/like.enum';
 import { LikeService } from '../like/like.service';
@@ -104,7 +104,7 @@ export class MemberService {
 			//MeFollowed
 			targetMember.meFollowed = await this.checkSubscription(memberId, targetId);
 		}
- 
+
 		return targetMember;
 	}
 
@@ -127,8 +127,10 @@ export class MemberService {
 				{ $sort: sort },
 				{
 					$facet: {
-						list: [{ $skip: (input.page - 1) * input.limit }, { $limit: input.limit },
-							lookupAuthMemberLiked(memberId, "$_id"),
+						list: [
+							{ $skip: (input.page - 1) * input.limit },
+							{ $limit: input.limit },
+							lookupAuthMemberLiked(memberId, '$_id'),
 						],
 						metaCounter: [{ $count: 'total' }],
 					},
