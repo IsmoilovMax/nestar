@@ -53,7 +53,7 @@ export class SocketGateway implements OnGatewayInit {
 	}
 	private broadcastMessage(sender: WebSocket, message: InfoPayload | MessagePayload) {
 		this.server.clients.forEach((client) => {
-			if (client! == sender && client.readyState === WebSocket.OPEN) {
+			if (client !== sender && client.readyState === WebSocket.OPEN) {
 				client.send(JSON.stringify(message));
 			}
 		});
