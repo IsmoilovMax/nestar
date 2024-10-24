@@ -11,11 +11,11 @@ export class MemberUpdate {
 
 	@IsOptional()
 	@Field(() => MemberType, { nullable: true })
-	MemberType?: MemberType;
+	memberType?: MemberType;
 
 	@IsOptional()
 	@Field(() => MemberStatus, { nullable: true })
-	MemberStatus?: MemberStatus;
+	memberStatus?: MemberStatus;
 
 	@IsOptional()
 	@Field(() => String, { nullable: true })
