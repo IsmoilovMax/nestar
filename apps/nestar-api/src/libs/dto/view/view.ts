@@ -18,7 +18,7 @@ export class View {
     memberId: ObjectId;
 
     @Field(() => Date)
-    createddAt: Date;
+    createdAt: Date;
 
     @Field(() => Date)
     updatedAt: Date;
