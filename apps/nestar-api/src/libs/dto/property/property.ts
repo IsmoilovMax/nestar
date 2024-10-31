@@ -61,7 +61,7 @@ export class Property {
 	propertyRent: boolean;
 
 	@Field(() => String)
-	memberId: ObjectId;
+	memberId: ObjectId;	
 
 	@Field(() => Date, { nullable: true })
 	soldAt?: Date;
