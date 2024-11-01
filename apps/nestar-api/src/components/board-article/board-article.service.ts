@@ -93,9 +93,8 @@ export class BoardArticleService {
 				targetKey: 'memberArticles',
 				modifier: -1,
 			});
-
-			return result;
 		}
+		return result;
 	}
 
 	public async getBoardArticles(memberId: ObjectId, input: BoardArticlesInquiry): Promise<BoardArticles> {
@@ -134,10 +133,10 @@ export class BoardArticleService {
 		return result[0];
 	}
 
-	public async likeTargetBoardArticle(memberId: ObjectId, likeRefId: ObjectId):Promise<BoardArticle>{
+	public async likeTargetBoardArticle(memberId: ObjectId, likeRefId: ObjectId): Promise<BoardArticle> {
 		const target: BoardArticle = await this.boardArticleModel
-		.findOne({ _id: likeRefId, articleStatus: BoardArticleStatus.ACTIVE })
-		.exec()
+			.findOne({ _id: likeRefId, articleStatus: BoardArticleStatus.ACTIVE })
+			.exec();
 
 		if (!target) throw new InternalServerErrorException(Message.NO_DATA_FOUND);
 
@@ -213,15 +212,15 @@ export class BoardArticleService {
 			});
 		}
 		return result;
-	};
+	}
 
-    public async removeBoardArticleByAdmin(articleId: ObjectId): Promise<BoardArticle>{
-        const search: T = { _id: articleId, articleStatus: BoardArticleStatus.DELETE };
-        const result = await this.boardArticleModel.findByIdAndDelete(search).exec();
-        if (!result) throw new InternalServerErrorException(Message.REMOVE_FAILED);
+	public async removeBoardArticleByAdmin(articleId: ObjectId): Promise<BoardArticle> {
+		const search: T = { _id: articleId, articleStatus: BoardArticleStatus.DELETE };
+		const result = await this.boardArticleModel.findByIdAndDelete(search).exec();
+		if (!result) throw new InternalServerErrorException(Message.REMOVE_FAILED);
 
-        return result;
-    }
+		return result;
+	}
 
 	public async boardArticleStatsEditor(input: StatisticModifier): Promise<BoardArticle> {
 		const { _id, targetKey, modifier } = input;
