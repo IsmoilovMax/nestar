@@ -145,9 +145,9 @@ export class PropertyService {
 
 		if (memberId) match.memberId = shapeIntoMongoObjectId(memberId);
 		if (locationList && locationList.length) match.propertyLocation = { $in: locationList };
-		if (roomsList  && roomsList.length) match.propertyRooms = { $in: roomsList };
-		if (bedsList  && bedsList.length) match.propertyBeds = { $in: bedsList };
-		if (typeList  && typeList.length) match.propertyType = { $in: typeList };
+		if (roomsList && roomsList.length) match.propertyRooms = { $in: roomsList };
+		if (bedsList && bedsList.length) match.propertyBeds = { $in: bedsList };
+		if (typeList && typeList.length) match.propertyType = { $in: typeList };
 
 		if (pricesRange) match.propertyPrice = { $gte: pricesRange.start, $lte: pricesRange.end };
 		if (periodsRange) match.createdAt = { $gte: periodsRange.start, $lte: periodsRange.end };
@@ -168,7 +168,6 @@ export class PropertyService {
 	public async getVisited(memberId: ObjectId, input: OrdinaryInquiry): Promise<Properties> {
 		return await this.viewService.getVisitedProperties(memberId, input);
 	}
-
 
 	public async getAgentProperties(memberId: ObjectId, input: AgentPropertiesInquiry): Promise<Properties> {
 		const { propertyStatus } = input.search;
@@ -207,7 +206,7 @@ export class PropertyService {
 
 	public async likeTargetProperty(memberId: ObjectId, likeRefId: ObjectId): Promise<Property> {
 		const target: Property = await this.propertyModel
-			.findOne({ _id: likeRefId, propertyStatus: PropertyStatus.ACTIVE })
+			.findById({ _id: likeRefId, propertyStatus: PropertyStatus.ACTIVE })
 			.exec();
 
 		if (!target) throw new InternalServerErrorException(Message.NO_DATA_FOUND);
